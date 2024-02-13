@@ -39,8 +39,6 @@ fn main() {
         "0000000000000000000000000000000000000000000000000000000000000001"
     );
     assert_eq!(data[..4], IERC20::transferCall::SELECTOR);
-    // assert_eq!(decoded.encode(), data);
-
     let hashed_data_vec = keccak256(data.clone());
 
     println!("Hashed Data: {}", hashed_data_vec);
@@ -52,7 +50,7 @@ fn main() {
         gas: U256::from(100000),
         nonce: U256::from(0),
         deadline: 1707594318 as u64,
-        data: data.to_vec(),
+        data: hashed_data_vec.to_vec(),
     }; 
 
     let encoded_type = ForwardRequest::eip712_encode_type();
