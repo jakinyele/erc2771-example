@@ -27,7 +27,7 @@ fn main() {
     let meta_tx_domain: Eip712Domain = eip712_domain! {
         name: "Meta Transaction Forwarder",
         version: "1",
-        chain_id: 1115111,
+        chain_id: 11155111,
         verifying_contract: Address::from(hex!("BE4dcaE032a02110e37c4767B8EC6bFd40bdF5b7")),
         // salt: keccak256("my domain salt"),
     };
