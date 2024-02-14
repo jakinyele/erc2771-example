@@ -1,6 +1,6 @@
 
 use alloy_primitives::Address;
-use alloy_sol_types::{Eip712Domain, eip712_domain, SolStruct};
+use alloy_sol_types::{eip712_domain, Eip712Domain, SolStruct, SolValue};
 use alloy_primitives::{U256, keccak256};
 use alloy_sol_types::{sol, SolCall};
 use alloy_primitives::hex_literal::hex;
@@ -39,9 +39,6 @@ fn main() {
         "0000000000000000000000000000000000000000000000000000000000000001"
     );
     assert_eq!(data[..4], IERC20::transferCall::SELECTOR);
-    let hashed_data_vec = keccak256(data.clone());
-
-    println!("Hashed Data: {}", hashed_data_vec);
 
     let forward_request_message = ForwardRequest {
         from: Address::from(hex!("1d98BF1FE5ae430A98461bAd3b872031767c9634")),
@@ -50,7 +47,7 @@ fn main() {
         gas: U256::from(100000),
         nonce: U256::from(0),
         deadline: 1707594318 as u64,
-        data: hashed_data_vec.to_vec(),
+        data: data.abi_encode_packed(),
     }; 
 
     let encoded_type = ForwardRequest::eip712_encode_type();
