@@ -1,22 +1,15 @@
 use clap::Parser;
-use ethers::prelude::*;
-use ethers::utils::keccak256;
-use std::str::FromStr;
+// use ethers::utils::keccak256;
 use serde::{Serialize, Deserialize};
-use std::time::Duration;
 use ethers::{
     // contract::{Eip712, EthAbiType},
     core::{
-        types::{TransactionRequest, transaction::eip712::{Eip712, TypedData}, Address, U256},
+        types::{transaction::eip712::{Eip712, TypedData}},
         utils::hex,
-    },    
-    providers::{Http, Middleware, Provider},
+    },
 };
-use rlp::Rlp; 
-use ethers::abi::struct_def::StructFieldType::Type;
 use std::fs::File;
 use std::io::prelude::*;
-use std::path::PathBuf;
 
 #[derive(Parser)]
 struct Cli {
@@ -24,9 +17,8 @@ struct Cli {
     // typed structured data as json
     json: std::path::PathBuf,
 }
+fn main() {
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Cli::parse();
 
     let current_nonce = args.nonce;
@@ -41,7 +33,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Typed Data Structure: \n{:#?}\n", typed_data);
 
     // update with a replacement none if current_nonce > 0 && nonce key exists
-    if (current_nonce > 0 && typed_data.message.contains_key("nonce")) {
+    if current_nonce > 0 && typed_data.message.contains_key("nonce") {
         typed_data.message.insert("nonce".to_string(), current_nonce.into());
     }
 
@@ -58,5 +50,4 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let message_hash = typed_data.encode_eip712().unwrap();
     println!("Message hash: 0x{}", hex::encode(&message_hash));
 
-    Ok(())
 }

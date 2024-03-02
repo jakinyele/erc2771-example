@@ -1,0 +1,68 @@
+{
+    "domain": {
+        "chainId": 11155111,
+        "name": "Meta Transaction Forwarder",
+        "verifyingContract": "0xBE4dcaE032a02110e37c4767B8EC6bFd40bdF5b7",
+        "version": "1"
+    },
+    "message": {
+        "from": "0x1d98BF1FE5ae430A98461bAd3b872031767c9634",
+        "to": "0x59f913ae23172a22Ffc2846a56c0E8d7636B927F",
+        "value": 0,
+        "gas": 100000,
+        "nonce": 0,
+        "deadline": 1707594318,
+        "data": "0xa9059cbb000000000000000000000000966ef13ff6974ec7b7018cdbdedd77e9bffc33670000000000000000000000000000000000000000000000000000000000000001"
+    },
+    "types": {
+        "EIP712Domain": [
+            {
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "name": "version",
+                "type": "string"
+            },
+            {
+                "name": "chainId",
+                "type": "uint256"
+            },
+            {
+                "name": "verifyingContract",
+                "type": "address"
+            }
+        ],
+        "ForwardRequest": [
+            {
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "name": "value",
+                "type": "uint256"
+            },
+            {
+                "name": "gas",
+                "type": "uint256"
+            },
+            {
+                "name": "nonce",
+                "type": "uint256"
+            },
+            {
+                "name": "deadline",
+                "type": "uint48"
+            },
+            {
+                "name": "data",
+                "type": "bytes"
+            }
+        ]
+    },
+    "primaryType": "ForwardRequest"
+}
